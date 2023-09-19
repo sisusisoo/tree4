@@ -43,7 +43,7 @@ element dequeue(QueueType* q) {		// 삭제 함수
 	return q->data[(q->front)];
 }
 
-int evaluate(TreeNode* root){
+float evaluate(TreeNode* root){
 	if (root == NULL) return 0;
 	if (root->left == NULL && root->right == NULL) return (root->data);
 	else {
@@ -86,7 +86,7 @@ TreeNode e2 = { 3,  NULL,  NULL };
 TreeNode e3 = { '+', &e1,&e2 };
 TreeNode e4 = { 4, NULL, NULL };
 TreeNode e5 = { 5 , NULL,  NULL };
-TreeNode e6 = { '+', &e4,  &e5 };
+TreeNode e6 = { '*', &e4,  &e5 };
 TreeNode e7 = { '+', &e3,  &e6 };
 
 TreeNode e8 = { 6, NULL, NULL };
