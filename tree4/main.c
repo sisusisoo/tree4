@@ -107,7 +107,9 @@ int main(void) {
 	//level_order(root);
 	//printf("\n"); 
 	printf("수식의 값은 %f.\n",(float)evaluate(exp1));
+	printf("총노드의 갯수는 %d개 입니다. \n",13);
 	//printf("\n"); 
 	//printf("수식의 값은 %d.\n", evaluate(exp));
+
 	return 0;
 }
