@@ -1,11 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
+#define SIZE 50
+
+
 
 typedef struct TreeNode {
 	float data;
 	struct TreeNode* left, * right;
 } TreeNode;
+
+
+int top = -1;
+TreeNode* stack[SIZE];
 
 // 원형 큐 사용
 #define MAX_QUEUE_SIZE 100
@@ -62,6 +69,50 @@ float evaluate(TreeNode* root){
 	//return 0;
 }
 
+
+void push(TreeNode* p)
+{
+	if (top < SIZE - 1) {
+		stack[++(top)] = p;
+	}
+}
+// 스택에서 노드 꺼내기
+TreeNode* pop() {
+	TreeNode* p = NULL;
+	if (top >= 0) {
+		p = stack[top--];
+	}
+	return p;
+}
+
+
+// 반복적 전위 순회
+int preorder_iter(TreeNode* root)
+{
+
+	int count = 0;
+	push(root);
+	while (top >= 0)
+	{
+		count += 1;
+
+		TreeNode* current = stack[top];
+		TreeNode* del = pop();
+		printf("%d --> ", del->data);
+
+		TreeNode* temp = current->right;
+		if (temp != NULL) {
+			push(temp);
+		}
+		temp = current->left;
+		if (temp != NULL) {
+			push(temp);
+		}
+
+	}
+	printf("\n");
+	return count;
+}
 TreeNode a1 = { 1,  NULL, NULL };
 TreeNode a2 = { 4,  NULL,  NULL };
 TreeNode a3 = { '*', &a1,&a2 };
@@ -110,6 +161,9 @@ int main(void) {
 	printf("총노드의 갯수는 %d개 입니다. \n",13);
 	//printf("\n"); 
 	//printf("수식의 값은 %d.\n", evaluate(exp));
+
+
+	printf("총노드의 갯수는 %d개 입니다.",preorder_iter(exp1));
 
 	return 0;
 }
